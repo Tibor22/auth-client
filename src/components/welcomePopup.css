@@ -1,0 +1,49 @@
+.center-popup {
+    position: absolute;
+    height: 14rem;
+    width: 34rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:rgb(228, 219, 219);
+
+}
+
+.welcome-popup {
+    position: absolute;
+    top: 0;
+    width:100%;
+    height: 100vh;
+    background-color: aliceblue;
+    animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: .5s;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s .5s, opacity .5s linear;
+  }
+
+.close {
+    position: absolute;
+    right: 5px;
+    font-weight: bold;
+    color: rgb(96, 88, 88);
+    cursor: pointer;
+    opacity: 1;
+
+}
+
+
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

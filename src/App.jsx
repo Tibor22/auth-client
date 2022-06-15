@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import Form from './components/Form';
 import Input from './components/Input';
+import WelcomePopup from './components/welcomePopup';
 
 export default function App() {
     const [user, setUser] = useState({ username: '', password: '' });
@@ -11,6 +12,31 @@ export default function App() {
     const register = async (e) => {
         e.preventDefault();
         // Write your register code here
+          console.log(user)
+        const post = {
+            method: 'POST', // or 'PUT'
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        }
+        try {
+            const data = await fetch('http://localhost:4000/register',post);
+            console.log(data)
+            const res = await data.json()
+            // if(!res) {
+            //     throw new Error('Username already exist!')
+            // }
+            console.log(res)
+            setRegisterResponse(res.data)
+        } catch(err) {
+           console.log(err)
+        }
+
+        
+      
+
+        
 
 
     };
@@ -19,12 +45,22 @@ export default function App() {
         e.preventDefault();
         // Write your login code here
 
+        const post = {
+            method: 'POST', // or 'PUT'
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        }
+
+        const data = await fetch('http://localhost:4000/login',post);
+        const res = await data.json()
+        setLoginResponse(res.data)
+      
+
+        console.log(loginResponse)
         
     };
-
-
-
-
 
 
     // You can safely ignore everything below this line, it's just boilerplate
@@ -38,13 +74,14 @@ export default function App() {
             [name]: value
         });
     }
-
+console.log(loginResponse)
+    // console.log(registerResponse)
     return (
         <div className="App">
 
-            <h1>Register</h1>
+           {!registerResponse &&  !loginResponse && <h1>Register</h1>} 
 
-            <Form
+           {!registerResponse &&  !loginResponse && <Form
                 handleSubmit={register}
                 inputs={[
                     <Input
@@ -65,12 +102,13 @@ export default function App() {
                     />
                 ]}
             />
+}
 
-            {registerResponse && <p>{registerResponse}</p>}
+            {registerResponse && !loginResponse &&  <WelcomePopup text={'Welcome to your new account!'} name={registerResponse.username}/>}
 
-            <h1>Login</h1>
+           {!loginResponse ? <h1>Login</h1> : <h1>Logout</h1>}
 
-            <Form
+            {!loginResponse && <Form
                 handleSubmit={login}
                 inputs={[
                     <Input
@@ -90,9 +128,9 @@ export default function App() {
                         handleChange={handleChange}
                     />
                 ]}
-            />
+            />}
 
-            {loginResponse && <p>{loginResponse}</p>}
+            {loginResponse && <WelcomePopup text={'We are happy to see you again!'} name={loginResponse.username}/>}
 
         </div>
     );
