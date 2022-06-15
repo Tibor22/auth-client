@@ -1,0 +1,31 @@
+.error-container  {
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+
+.warning {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    background-image: url('https://i.imgur.com/Z8q7ww7.png');
+ 
+}
+.error{
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('https://i.imgur.com/GnyDvKN.png');
+    background-repeat: no-repeat;
+    background-position: left;
+
+    /* display:flex;
+    justify-content:center;
+    align-items:center; */
+   width:18rem;
+   padding: .6rem;
+}
+.validation{
+    color: #D63301;
+    background-color: #FFCCBA;
+    background-image: url('https://i.imgur.com/GnyDvKN.png');
+}
